@@ -20,7 +20,7 @@ public class InsuranceTestSber {
     public void beforeTest (){
         System.setProperty("webdriver.chrome.driver", "drv/chromedriver");
         driver = new ChromeDriver();
-        baseUrl = "http://www.sberbank.ru/ru/person";
+        baseUrl = "http://www.sberbank.ru/ru/person/bank_inshure/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(baseUrl);
@@ -31,7 +31,10 @@ public class InsuranceTestSber {
 
         Wait<WebDriver> wait = new WebDriverWait(driver,15,1000);
 
+        driver.getTitle();
+
         WebElement insurance = driver.findElement(By.xpath("//span[text()='Страхование']"));
+
         wait.until(ExpectedConditions.visibilityOf(insurance)).click();
 
         WebElement travelPushcase = driver.findElement
@@ -52,6 +55,7 @@ public class InsuranceTestSber {
 
 
         driver.findElement(By.xpath("//span[text()='Оформить']")).click();
+
 
         fillField(By.name("insured0_surname"),"FAMILINS");
         fillField(By.name("insured0_name"),"NAMES");
@@ -99,7 +103,6 @@ public class InsuranceTestSber {
         assertEquals("Кем то выдан",
                 driver.findElement(By.name("issuePlace")).getAttribute("value"));
 
-
     }
 
     public void fillField(By locator, String value){
@@ -107,6 +110,7 @@ public class InsuranceTestSber {
         driver.findElement(locator).sendKeys(value);
 
     }
+
     @After
     public void afterTest(){
         //driver.quit();
