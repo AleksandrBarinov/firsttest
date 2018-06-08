@@ -34,19 +34,17 @@ public class InsuranceTestSber {
         WebElement insurance = driver.findElement(By.xpath("//span[text()='Страхование']"));
         wait.until(ExpectedConditions.visibilityOf(insurance)).click();
 
-        driver.findElement
-                (By.xpath("//*[contains(@class,'lg-menu__sub-item')]//*[contains(text(),'Путешествия и покупки')]")).click();
-
+        WebElement travelPushcase = driver.findElement
+                (By.xpath("//*[contains(@class,'lg-menu__sub-item')]//*[contains(text(),'Путешествия и покупки')]"));
+        wait.until(ExpectedConditions.visibilityOf(travelPushcase)).click();
 
         WebElement registerOnline = driver.findElement
                 (By.xpath("//div[@data-pid='SBRF-TEXT-2247407']/..//a[text()='Оформить онлайн']"));
         wait.until(ExpectedConditions.visibilityOf(registerOnline)).click();
 
 
-        ArrayList tabs2 = new ArrayList(driver.getWindowHandles());//Получение списка табов
-        driver.switchTo().window((String) tabs2.get(1));//Переключение на второй таб в браузере
-        //driver.switchTo().window(tabs2.get(0));//Переключение на первый таб в браузере
-        //driver.close();//Закрытие активного таба
+        ArrayList tabs2 = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window((String) tabs2.get(1));
 
 
         WebElement minimal = driver.findElement(By.xpath("//*[text()='Минимальная']"));
