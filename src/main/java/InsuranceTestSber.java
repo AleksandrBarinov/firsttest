@@ -113,7 +113,7 @@ public class InsuranceTestSber {
 
     @After
     public void afterTest(){
-        //driver.quit();
+        driver.quit();
 
     }
 }
