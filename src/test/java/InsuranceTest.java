@@ -27,6 +27,7 @@ public class InsuranceTest {
     }
 
     @Test
+    @Ignore
     public void testInsuranceSb (){
 
         Wait<WebDriver> wait = new WebDriverWait(driver,15,1000);
