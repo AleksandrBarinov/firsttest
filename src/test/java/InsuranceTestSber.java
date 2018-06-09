@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class InsuranceTest {
+public class InsuranceTestSber {
     private WebDriver driver;
     private String baseUrl;
 
