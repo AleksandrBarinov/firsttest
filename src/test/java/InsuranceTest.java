@@ -2,37 +2,25 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
-public class InsuranceTest {
-    private WebDriver driver;
-    private String baseUrl;
+public class InsuranceTest extends BaseTest {
+    public void fillField(By locator, String value){
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(value);
 
-    @Before
-    public void beforeTest (){
-        System.setProperty("webdriver.chrome.driver", "drv/chromedriver");
-        driver = new ChromeDriver();
-        baseUrl = "http://www.sberbank.ru/ru/person/bank_inshure/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(baseUrl);
     }
 
     @Test
-    @Ignore
-    public void testInsuranceSb (){
+    public void testInsuranceSb() {
 
-        Wait<WebDriver> wait = new WebDriverWait(driver,15,1000);
-
-        driver.getTitle();
+        Wait <WebDriver> wait = new WebDriverWait(driver, 15, 1000);
 
         WebElement insurance = driver.findElement(By.xpath("//span[text()='Страхование']"));
 
@@ -58,19 +46,19 @@ public class InsuranceTest {
         driver.findElement(By.xpath("//span[text()='Оформить']")).click();
 
 
-        fillField(By.name("insured0_surname"),"FAMILINS");
-        fillField(By.name("insured0_name"),"NAMES");
-        fillField(By.name("insured0_birthDate"),"26021990");
+        fillField(By.name("insured0_surname"), "FAMILINS");
+        fillField(By.name("insured0_name"), "NAMES");
+        fillField(By.name("insured0_birthDate"), "26021990");
 
-        fillField(By.name("surname"),"Фамилинс");
-        fillField(By.name("name"),"Нэймс");
-        fillField(By.name("middlename"),"Батькович");
-        fillField(By.name("birthDate"),"26021990");
+        fillField(By.name("surname"), "Фамилинс");
+        fillField(By.name("name"), "Нэймс");
+        fillField(By.name("middlename"), "Батькович");
+        fillField(By.name("birthDate"), "26021990");
 
-        fillField(By.name("passport_series"),"5555");
-        fillField(By.name("passport_number"),"555555");
-        fillField(By.name("issueDate"),"10102010");
-        fillField(By.name("issuePlace"),"Кем то выдан");
+        fillField(By.name("passport_series"), "5555");
+        fillField(By.name("passport_number"), "555555");
+        fillField(By.name("issueDate"), "10102010");
+        fillField(By.name("issuePlace"), "Кем то выдан");
 
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
 
@@ -104,17 +92,11 @@ public class InsuranceTest {
         assertEquals("Кем то выдан",
                 driver.findElement(By.name("issuePlace")).getAttribute("value"));
 
-    }
+        assertEquals("Заполнены не все обязательные поля",driver.findElement
+                (By.xpath("//*[text()='Заполнены не все обязательные поля']")).getText());
 
-    public void fillField(By locator, String value){
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(value);
 
-    }
-
-    @After
-    public void afterTest(){
-        driver.quit();
 
     }
 }
+
