@@ -45,7 +45,7 @@ public class TestForAllureReport extends BaseSteps{
 
         questionnaireSteps.stepFillFields(testData);
 
-        assertEquals("5155",testData.get("passportSeries"));
+        assertEquals("11102010",testData.get("issueDate"));
 
         questionnaireSteps.selectContinue();
     }

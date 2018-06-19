@@ -1,9 +1,12 @@
 package steps;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.yandex.qatools.allure.annotations.Attachment;
 import util.TestProperties;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +27,16 @@ public class BaseSteps {
         driver.get(baseUrl);
     }
 
-    @After
-    public void afterTest() {
+    @AfterClass
+    public static void afterTest() {
         driver.quit();
     }
+
+    @Attachment(type = "image/png")
+    public static byte[] makeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
 
 }
 
